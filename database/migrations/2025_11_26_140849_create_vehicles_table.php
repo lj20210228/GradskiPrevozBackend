@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('vehicle_code')->nullable(); // broj vozila ili registracija
+            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->string('vehicle_code')->nullable();
             $table->foreignId('line_id')->nullable()->constrained('lines')->onDelete('set null');
             $table->boolean('active')->default(true);
             $table->timestamps();
