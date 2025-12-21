@@ -96,10 +96,8 @@ class VehicleController extends Controller
     }
     public function getAllVehiclesForDriver( $userId)
     {
-
-
-        $vehicles=Vehicle::where('user_id',$userId)->first();
-        return response()->json(['vehicles'=>new VehicleResource($vehicles), 'message' => 'Vehicles founded successfully'], 200);
+        $vehicles=Vehicle::where('user_id',$userId)->get();
+        return response()->json(['vehicles'=>VehicleResource::collection($vehicles), 'message' => 'Vehicles founded successfully'], 200);
 
     }
 }
